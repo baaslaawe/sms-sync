@@ -7,6 +7,7 @@ public class Sms {
 
     private int id;
     private String senderPhone;
+    private String receiverPhone;
     private String message;
     private String receivedTime;
     private int status;
@@ -24,6 +25,10 @@ public class Sms {
 
     public void setSenderPhone(String senderPhone) {
         this.senderPhone = senderPhone;
+    }
+
+    public void setReceiverPhone(String receiverPhone) {
+        this.receiverPhone = receiverPhone;
     }
 
     public void setMessage(String message) {
@@ -48,6 +53,10 @@ public class Sms {
 
     public String getSenderPhone() {
         return senderPhone;
+    }
+
+    public String getReceiverPhone() {
+        return receiverPhone;
     }
 
     public int getStatus() {

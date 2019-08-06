@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.telephony.SmsMessage;
 import android.widget.Toast;
 
+import com.taba.apps.smssync.api.Api;
 import com.taba.apps.smssync.local.Database;
+import com.taba.apps.smssync.local.SharedPreference;
 import com.taba.apps.smssync.tools.Tool;
 
 public class SmsReceiver extends BroadcastReceiver {
@@ -27,23 +29,21 @@ public class SmsReceiver extends BroadcastReceiver {
                 smsMessage[index] = SmsMessage.createFromPdu((byte[]) pdus[index]);
                 senderPhone = smsMessage[index].getDisplayOriginatingAddress();
                 messageBody += smsMessage[index].getDisplayMessageBody();
-                messageBody += "\r\n";
+                //messageBody += "\r\n";
             }
 
-            String tesString = messageBody + " from "+senderPhone;
-            Toast.makeText(context, senderPhone, Toast.LENGTH_LONG).show();
+            //String tesString = messageBody + " from "+senderPhone;
+            //Toast.makeText(context, senderPhone, Toast.LENGTH_LONG).show();
 
 
             //Save sms to Database
             Sms sms = new Sms();
             sms.setSenderPhone(senderPhone);
+            sms.setReceiverPhone(SharedPreference.getDevicePhoneNumber(context));
             sms.setMessage(messageBody);
             sms.setReceivedTime(Tool.getCurrentTimeStamp());
 
-            Database database = new Database(context);
-            if (database.addSms(sms)){
-                Toast.makeText(context, "Added to Database", Toast.LENGTH_LONG).show();
-            }
+            Api.postSms(context,sms,false);
         }
 
     }

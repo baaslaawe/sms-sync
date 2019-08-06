@@ -16,7 +16,7 @@ import java.util.List;
 public class Database extends SQLiteOpenHelper {
 
     protected static final String NAME = "sms_sync.db";
-    protected static final int VERSION = 2;
+    protected static final int VERSION = 3;
 
     private Context context;
 
@@ -43,6 +43,7 @@ public class Database extends SQLiteOpenHelper {
         query += "(";
         query += "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,";
         query += "senderPhone VARCHAR(16) NOT NULL,";
+        query += "receiverPhone VARCHAR(16) NOT NULL,";
         query += "message TEXT NOT NULL,";
         query += "receivedTime TIMESTAMP NOT NULL DEFAULT current_timestamp,";
         query += "status INTEGER(1) DEFAULT 0";
@@ -56,6 +57,7 @@ public class Database extends SQLiteOpenHelper {
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("senderPhone", sms.getSenderPhone());
+        values.put("receiverPhone", sms.getReceiverPhone());
         values.put("message", sms.getMessage());
         values.put("receivedTime", sms.getReceivedTime());
         boolean success = database.insert("sms", null, values) != -1;
@@ -65,10 +67,10 @@ public class Database extends SQLiteOpenHelper {
 
 
 
-    public List<Sms> getMessages() {
+    public List<Sms> getNonSynchronizedSms() {
         SQLiteDatabase database = this.getReadableDatabase();
         String query = "";
-        query += "SELECT * FROM sms";
+        query += "SELECT * FROM sms WHERE status = "+Sms.STATUS_UNSYNCHRONIZED;
         Cursor cursor = database.rawQuery(query, null);
 
         List<Sms> messages= new ArrayList<>();
@@ -77,6 +79,7 @@ public class Database extends SQLiteOpenHelper {
             Sms sms = new Sms();
             sms.setId(cursor.getInt(cursor.getColumnIndex("id")));
             sms.setSenderPhone(cursor.getString(cursor.getColumnIndex("senderPhone")));
+            sms.setReceiverPhone(cursor.getString(cursor.getColumnIndex("receiverPhone")));
             sms.setMessage(cursor.getString(cursor.getColumnIndex("message")));
             sms.setReceivedTime(cursor.getString(cursor.getColumnIndex("receivedTime")));
             sms.setStatus(Integer.parseInt(cursor.getString(cursor.getColumnIndex("status"))));

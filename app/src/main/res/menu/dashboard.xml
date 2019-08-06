@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item app:showAsAction="ifRoom|collapseActionView"
+        android:title="Synchronize Messages"
+        android:id="@+id/menuSyncMessages"
+        android:icon="@drawable/ic_sync"/>
+
+    <item android:title="Update Server Address"
+        android:id="@+id/menuUpdateDetails"
+        app:showAsAction="ifRoom|collapseActionView"
+        android:icon="@drawable/ic_edit"/>
+
+</menu>

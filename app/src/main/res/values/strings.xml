@@ -2,4 +2,5 @@
     <string name="app_name">Sms Sync</string>
     <string name="dashbord_title">Dashboard</string>
     <string name="unsynchronized_messages">Non Synchronized Messages</string>
+    <string name="sever_address_label">Server Address</string>
 </resources>
