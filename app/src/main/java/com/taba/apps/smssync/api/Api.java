@@ -20,7 +20,7 @@ import java.util.Map;
 
 public class Api {
 
-    public static final String SERVER_ADDRESS = "http://192.168.8.104:5200/sms";
+    public static final String SERVER_ADDRESS = "http://192.168.1.104:5200/sms";
 
     public static final String SECURITY_KEY = "";
 
@@ -44,7 +44,7 @@ public class Api {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, error.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(context, error.getLocalizedMessage(), Toast.LENGTH_LONG).show();
 
                 Database database = new Database(context);
 
@@ -80,6 +80,5 @@ public class Api {
 
         queue.add(stringRequest);
     }
-
 
 }

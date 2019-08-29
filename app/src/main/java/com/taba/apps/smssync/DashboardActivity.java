@@ -3,6 +3,7 @@ package com.taba.apps.smssync;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,6 +22,7 @@ import com.android.volley.toolbox.Volley;
 import com.taba.apps.smssync.api.Api;
 import com.taba.apps.smssync.local.Database;
 import com.taba.apps.smssync.local.SharedPreference;
+import com.taba.apps.smssync.notification.NotificationService;
 import com.taba.apps.smssync.sms.Sms;
 
 public class DashboardActivity extends AppCompatActivity {
@@ -39,7 +41,7 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     private void init() {
-        this.getSupportActionBar().setTitle(R.string.dashbord_title);
+        this.getSupportActionBar().setTitle(Html.fromHtml("<small>Dashboard</small>"));
 
         this.nonSynchronizedSmsCount = this.findViewById(R.id.nonSynchronizedSmsCount);
         this.updateSmsCounter();

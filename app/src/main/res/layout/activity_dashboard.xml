@@ -24,7 +24,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:textAppearanceLarge"
+                android:textAppearance="?android:textAppearanceMedium"
                 android:text="@string/unsynchronized_messages"
                 android:textAlignment="center"/>
 

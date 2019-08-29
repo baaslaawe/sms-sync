@@ -16,7 +16,7 @@ import java.util.List;
 public class Database extends SQLiteOpenHelper {
 
     protected static final String NAME = "sms_sync.db";
-    protected static final int VERSION = 3;
+    protected static final int VERSION = 5;
 
     private Context context;
 
